@@ -1,0 +1,56 @@
+﻿@model News_Website.Models.ContactUs
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+    
+    <section class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact</h2>
+
+            </div>
+            <div class="row justify-content-center p-2">
+
+                <div class="col-md-6">
+                    <form asp-action="Contact" class="php-email-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        @*<input type="hidden" asp-for="Id" />*@
+
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Subject" class="control-label"></label>
+                            <input asp-for="Subject" class="form-control" />
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Message" class="control-label"></label>
+                            <input asp-for="Message" class="form-control" />
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+
+                        <div class="mt-2">
+                            <a asp-action="Index" class="scrollto"  style="border-radius:4px; padding:8px 25px; color:white; transition: 0.3s; display: inline-block; background:#3fbbc0">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+

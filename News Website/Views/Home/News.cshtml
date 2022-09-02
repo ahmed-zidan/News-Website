@@ -1,0 +1,34 @@
+﻿@model IEnumerable<News_Website.Models.News>
+
+@{
+    ViewData["Title"] = "News";
+}
+    <section id="testimonials" class="testimonials">
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>@ViewBag.news.Name</h2>
+            </div>
+            <div class="justify-content-center">
+            @foreach (var item in Model)
+            {
+                    <div class="swiper-slide d-flex justify-content-center" data-swiper-slide-index="3" role="group" aria-label="4 / 5" style="width: 418.667px; margin-right: 20px;">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                            <img src="~/assets/img/testimonials/@item.Image" class="testimonial-img" alt="">
+                            <h3>@item.Titley</h3>
+                            <h4>@item.Date</h4>
+                        </div>
+                        
+                    </div><!-- End testimonial item -->
+            }
+
+
+
+        </div>
+            </div>
+    </section>

@@ -4,23 +4,57 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using News_Website.Infrastructure;
 using News_Website.Models;
 
 namespace News_Website.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
+        private readonly NewsContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController( NewsContext context)
         {
-            _logger = logger;
+// _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            return View(_context.Categories.ToList());
+        }
+
+        //get home/Contact
+        public IActionResult Contact()
+        {
             return View();
+        }
+
+        //post home/Contact
+        [HttpPost]
+        public async Task<IActionResult> Contact(ContactUs contact)
+        {
+            await _context.Contacts.AddAsync(contact);
+            await _context.SaveChangesAsync();
+
+            return Redirect("Index");
+
+
+
+        }
+
+
+        public async Task<IActionResult> News(int id)
+        {
+
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            ViewBag.news = category;
+            IEnumerable<News> news = await _context.News.Include(x=>x.Category).Where(x=>x.CategoryId == id).ToListAsync();
+
+            return View(news);
         }
 
         public IActionResult Privacy()
@@ -33,5 +67,11 @@ namespace News_Website.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
     }
 }

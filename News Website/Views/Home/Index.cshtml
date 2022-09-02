@@ -1,8 +1,28 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<Category>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<section id="featured-services" class="featured-services">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="row">
+           
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon"><i class="@item.Logo"></i></div>
+                        <h4 class="title"><a href="">@item.Name</a></h4>
+                        <p class="description">@item.Desc</p>
+                        <a asp-action="News" asp-controller="Home" asp-route-id="@item.Id" class="btn btn-outline-success">View More</a>
+                    </div>
+            
+                </div>
+            }
+
+
+
+        </div>
+
+    </div>
+</section>
